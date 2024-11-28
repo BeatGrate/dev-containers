@@ -4,7 +4,10 @@
 	// Set devcontainer name
 	"name": "${localWorkspaceFolderBasename",
 	// Build devcontainer using a Dockerfile
-	"build": {"dockerfile": "Containerfile.template"},
+	"build": {
+		"dockerfile": "../Containerfiles/Containerfile.learning-make",
+		"context": "."
+	},
 
 	// Non-root User Configuration
 	"containerUser": "podman",
