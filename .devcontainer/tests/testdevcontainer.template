@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -oe pipefail -u
+
+runTests() {
+    echo "Kicking the tires..."
+}
+
+runTests

@@ -1,0 +1,50 @@
+command_timeout = 10000
+format = """
+
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$kubernetes\
+$cmd_duration\
+$line_break\
+$character"""
+
+[hostname]
+format = '$ssh_symbol [$hostname](light blue) 📍'
+ssh_symbol = "🐳 "
+
+[directory]
+read_only = " ⛔"
+
+[git_branch]
+format = "[$symbol $branch]($style)"
+symbol = "🌿 "
+truncation_length = 32
+
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](bright-black) ($ahead_behind$stashed)]($style)"
+style = "cyan"
+conflicted = "*"
+untracked = "*"
+modified = "*"
+staged = "*"
+renamed = "*"
+deleted = "*"
+stashed = "*"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)] ($style)\) '
+style = "bright-black"
+
+[cmd_duration]
+format = "[$duartion]($style) "
+style = "bright-black"
+
+# ~/.config/starship.toml
+
+[kubernetes]
+format = 'K🎱S[ $context \($namespace\)](green) '
+disabled = false

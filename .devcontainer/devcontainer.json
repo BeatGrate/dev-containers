@@ -1,0 +1,17 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	// Set devcontainer name
+	"name": "${localWorkspaceFolderBasename",
+	// Build devcontainer using a Dockerfile
+	"build": {"dockerfile": "Containerfile.template"},
+
+	// Non-root User Configuration
+	"containerUser": "podman",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/podman/${localWorkspaceFolderBasename},type=bind",
+	"workspaceFolder": "/home/podman/${localWorkspaceFolderBasename}",
+	"runArgs": [
+		"--userns=keep-id:uid=1000,gid=1000"
+		// Put extra podman run arguments here
+	]
+}
