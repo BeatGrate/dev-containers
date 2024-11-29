@@ -10,7 +10,7 @@ RUN set -x && \
         # Add external repos here
     dnf copr enable -y atim/starship && \
     dnf upgrade -y && \
-    dnf install -y --allowerasing \
+    dnf install -y --allowerasing --skip-broken \
         # Add/remove dnf packages here
         sudo \
         curl \
@@ -24,6 +24,7 @@ RUN set -x && \
         rsync \
         git \
         vim \
+        gcc-c++ \
         starship && \
     dnf clean dbcache
 

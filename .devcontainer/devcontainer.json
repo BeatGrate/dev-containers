@@ -2,10 +2,10 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
 	// Set devcontainer name
-	"name": "${localWorkspaceFolderBasename",
-	// Build devcontainer using a Dockerfile
+	"name": "${localWorkspaceFolderBasename}",
+	// Build devcontainer using a Containerfile
 	"build": {
-		"dockerfile": "../Containerfiles/Containerfile.learning-make",
+		"dockerfile": "Containerfiles/Containerfile.learning-make",
 		"context": "."
 	},
 
