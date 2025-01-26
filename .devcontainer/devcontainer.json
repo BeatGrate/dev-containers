@@ -5,7 +5,7 @@
 	"name": "${localWorkspaceFolderBasename}",
 	// Build devcontainer using a Containerfile
 	"build": {
-		"dockerfile": "Containerfiles/Containerfile.learning-make",
+		"dockerfile": "Containerfiles/Containerfile.homelab",
 		"context": "."
 	},
 

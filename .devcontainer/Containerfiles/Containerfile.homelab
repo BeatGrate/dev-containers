@@ -1,0 +1,59 @@
+# For further documentation, see REPO URL
+
+# Specify base image
+FROM redhat/ubi9
+
+# Install tools via package managers
+RUN set -x && \
+    dnf install -y \
+        "https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm" && \
+        # Add external repos here
+    dnf copr enable -y atim/starship && \
+    dnf upgrade -y && \
+    dnf install -y --allowerasing \
+        # Add/remove dnf packages here
+        sudo \
+        curl \
+        bash-completion \
+        unzip \
+        wget \
+        git \
+        vim \
+        dos2unix \
+        starship && \
+    dnf clean dbcache
+    
+# Add your scripts here
+# ADD --chown=root:root scripts/your-script.sh /your-script.sh
+ADD --chown=root:root scripts/install-talosctl.sh /install-talosctl.sh
+COPY --chmod=0755 tests/testdevcontainer.template /usr/local/bin/testdevcontainer
+
+# Define non-Root user variables
+ARG USERNAME="podman"
+ARG USER_UID=1000
+ARG USER_GID=1000
+
+# Create/configure non-root user
+RUN set -x && \
+    groupadd --gid "${USER_GID}" "${USERNAME}" && \
+    useradd --uid "${USER_UID}" --gid "${USER_GID}" "${USERNAME}" && \
+    echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/${USERNAME}" && \
+    chmod 0440 "/etc/sudoers.d/${USERNAME}"
+
+# Non-root user shell configuration
+ADD --chown="${USERNAME}":"${USERNAME}" /.config "/home/${USERNAME}/.config"
+ADD --chown="${USERNAME}":"${USERNAME}" /.config/.bashrc "/home/${USERNAME}/.bashrc"
+
+# Run your scripts here
+RUN set -x && \
+    # ----
+    # Install tool
+    # ----
+    # bash /your-script.sh
+    # ----
+    # Install talosctl
+    # ----
+    bash /install-talosctl.sh
+
+# Make non-root user the default user
+USER "${USERNAME}"
