@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-set -oe pipefail -u
+set -eo pipefail -u
 
 runTests() {
-    echo "Kicking the tires..."
+  echo "Kicking the tires..."
 }
 
 runTests
