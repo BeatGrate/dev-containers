@@ -26,6 +26,8 @@ RUN set -x && \
 # Add your scripts here
 # ADD --chown=root:root scripts/your-script.sh /your-script.sh
 ADD --chown=root:root scripts/install-talosctl.sh /install-talosctl.sh
+ADD --chown=root:root scripts/install-kubectl.sh /install-kubectl.sh
+ADD --chown=root:root scripts/install-k9s.sh /install-k9s.sh
 COPY --chmod=0755 tests/testdevcontainer.template /usr/local/bin/testdevcontainer
 
 # Define non-Root user variables
@@ -53,7 +55,15 @@ RUN set -x && \
     # ----
     # Install talosctl
     # ----
-    bash /install-talosctl.sh
+    bash /install-talosctl.sh && \
+    # ----
+    # Install talosctl
+    # ----
+    bash /install-kubectl.sh && \
+    # ----
+    # Install talosctl
+    # ----
+    bash /install-k9s.sh
 
 # Make non-root user the default user
 USER "${USERNAME}"
